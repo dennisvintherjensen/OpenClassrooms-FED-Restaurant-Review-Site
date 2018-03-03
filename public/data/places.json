@@ -1,0 +1,143 @@
+
+ [
+  {
+      "name":"Madhuset",
+      "vicinity":"Amagerbrogade 45, 2300 København S",
+      "geometry": {
+          "location": {
+            "lat":55.657194,
+            "lng":12.605452
+          }
+      },
+      "place_id": 0,
+      "id": 0,
+      "rating":3,
+      "reviews":[
+         {
+            "author_name": "Kim Andersen",
+            "rating":1,
+            "text":"This is food as food is meant to be!",
+            "time": 1491299032
+         },
+         {
+            "author_name": "Gorm Jensen",
+            "rating":5,
+            "text":"Absolutely love it!",
+            "time": 1491299031
+         }
+      ],
+      "source": "local"
+   },
+   {
+      "name":"Birgers Burgers",
+      "vicinity":"Englandsvej 37, 2300 København S",
+      "geometry": {
+          "location": {
+            "lat":55.657236,
+            "lng":12.608695
+          }
+      },
+      "place_id": 1,
+      "id": 1,
+      "rating":3,
+      "reviews":[
+         {
+            "author_name": "Kim Andersen",
+            "rating":4,
+            "text":"Burgers! Very good Burgers!.",
+            "time": 1491299033
+         },
+         {
+            "author_name": "Gorm Jensen",
+            "rating":2,
+            "text":"Great food delivered very fast.",
+            "time": 1491299034
+         }
+      ],
+      "source": "local"
+   },
+   {
+      "name":"Café Snik Snak",
+      "vicinity":"Amagerbrogade 10, 2300 København S",
+      "geometry": {
+          "location": {
+            "lat":55.666437,
+            "lng":12.598533
+          }
+      },
+      "place_id": 2,
+      "id": 2,
+      "rating":4.5,
+      "reviews":[
+         {
+            "author_name": "Kim Andersen",
+            "rating":4,
+            "text":"Staff is super friendly. Food is average.",
+            "time": 1491299035
+         },
+         {
+            "author_name": "Gorm Jensen",
+            "rating":5,
+            "text":"Not bad at all.",
+            "time": 1491299036
+         }
+      ],
+      "source": "local"
+   },
+   {
+      "name":"Cool Potato",
+      "vicinity":"Studiestræde 61, 1554, København V",
+      "geometry": {
+          "location": {
+            "lat":55.677097,
+            "lng":12.565401
+          }
+      },
+      "place_id": 3,
+      "id": 3,
+      "rating":4,
+      "reviews":[
+         {
+            "author_name": "Kim Andersen",
+            "rating":5,
+            "text":"Best potatoes ever!",
+            "time": 1491299038
+         },
+         {
+            "author_name": "Gorm Jensen",
+            "rating":3,
+            "text":"Not bad at all.",
+            "time": 1491299039
+         }
+      ],
+      "source": "local"
+   },
+   {
+      "name":"Hotdog Mania",
+      "vicinity":"Gammel Kongevej 120, 1850 Frederiksberg C",
+      "geometry": {
+          "location": {
+            "lat":55.676563,
+            "lng":12.542381
+          }
+      },
+      "place_id": 4,
+      "id": 4,
+      "rating":2.5,
+      "reviews":[
+         {
+            "author_name": "Kim Andersen",
+            "rating":2,
+            "text":"They do not serve potatoes!",
+            "time": 1491299041
+         },
+         {
+            "author_name": "Gorm Jensen",
+            "rating":3,
+            "text":"Not bad at all.",
+            "time": 1491299042
+         }
+      ],
+      "source": "local"
+   }
+ ]
