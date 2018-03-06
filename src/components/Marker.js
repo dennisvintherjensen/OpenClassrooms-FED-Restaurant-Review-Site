@@ -10,6 +10,17 @@ class Marker extends React.Component {
     if (this.props.map !== prevProps.map && this.props.map !== null) {
       this.renderMarker();
     }
+    // Scale icon for selected place
+    if (this.props.selectedPlace !== prevProps.selectedPlace) {
+      let icon = {
+        url: this.marker.getIcon().url,
+        scaledSize: {
+          height: this.props.selectedPlace ? 60 : 40,
+          width: this.props.selectedPlace ? 60 : 40
+        }
+      };
+      this.marker.setIcon(icon);
+    }
   }
 
   componentDidMount() {
@@ -20,9 +31,13 @@ class Marker extends React.Component {
 
   componentWillUnmount() {
     if (this.marker) {
-      this.marker.setMap(null);
-      this.marker = null;
+      this.removeMarker();
     }
+  }
+
+  removeMarker() {
+    this.marker.setMap(null);
+    this.marker = null;
   }
 
   renderMarker() {
@@ -43,9 +58,9 @@ class Marker extends React.Component {
     };
 
     if (this.props.icon) {
-      pref['icon'] = this.props.icon;
+      pref.icon = this.props.icon;
     } else {
-      pref['icon'] = {
+      pref.icon = {
         url: 'assets/images/restaurantmarker.svg',
         scaledSize: new google.maps.Size(40, 40)
       };
@@ -60,14 +75,42 @@ class Marker extends React.Component {
 
   addListeners() {
     this.marker.addListener('click', (_) => this.props.onClick());
+    this.marker.addListener('mouseover', (e) =>
+      this.props.onHover(this.point(), this.props.place)
+    );
+    this.marker.addListener('mouseout', () => this.props.onHoverOut());
+  }
+
+  point() {
+    const google = this.props.google;
+    const map = this.props.map;
+    var topRight = map
+      .getProjection()
+      .fromLatLngToPoint(map.getBounds().getNorthEast());
+    var bottomLeft = map
+      .getProjection()
+      .fromLatLngToPoint(map.getBounds().getSouthWest());
+    var scale = Math.pow(2, map.getZoom());
+    var worldPoint = map
+      .getProjection()
+      .fromLatLngToPoint(this.marker.position);
+    return new google.maps.Point(
+      (worldPoint.x - bottomLeft.x) * scale,
+      (worldPoint.y - topRight.y) * scale
+    );
   }
 }
 
 Marker.propTypes = {
   position: PropTypes.object,
   map: PropTypes.object,
+  google: PropTypes.object,
   onClick: PropTypes.func,
-  icon: PropTypes.object
+  icon: PropTypes.object,
+  onHover: PropTypes.func,
+  onHoverOut: PropTypes.func,
+  place: PropTypes.object,
+  selectedPlace: PropTypes.bool
 };
 
 export default Marker;

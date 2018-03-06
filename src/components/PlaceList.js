@@ -1,8 +1,19 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceListItem from './PlaceListItem';
+// Material
 import List from 'material-ui/List';
+import { CircularProgress } from 'material-ui/Progress';
+import { withStyles } from 'material-ui/styles';
+// Custom
+import PlaceListItem from './PlaceListItem';
 import RatingFilter from './RatingFilter';
+
+const style = {
+  placeList: {
+    height: '100%'
+  }
+};
 
 class PlaceList extends React.Component {
   constructor(props) {
@@ -13,11 +24,17 @@ class PlaceList extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
-      <div className="places-list">
+      <div className={classes.placeList}>
         <RatingFilter
           setMinRating={(value) => this.props.setMinRating(value)}
         />
+        {this.props.places.length === 0 ? (
+          <div className="progress-container">
+            <CircularProgress />
+          </div>
+        ) : null}
         <List>{this.renderListItems()}</List>
       </div>
     );
@@ -36,10 +53,11 @@ class PlaceList extends React.Component {
 }
 
 PlaceList.propTypes = {
+  classes: PropTypes.object.isRequired,
   places: PropTypes.array,
   setSelectedPlace: PropTypes.func,
   minRating: PropTypes.number,
   setMinRating: PropTypes.func
 };
 
-export default PlaceList;
+export default withStyles(style)(PlaceList);

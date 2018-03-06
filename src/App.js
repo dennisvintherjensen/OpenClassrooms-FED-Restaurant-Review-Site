@@ -214,7 +214,6 @@ class App extends Component {
       (place, status) => {
         if (status === this.google.maps.places.PlacesServiceStatus.OK) {
           // Merge details with places object
-          console.log(place);
           const selectedPlace = { ...this.state.selectedPlace, ...place };
           this.setState({
             selectedPlace: selectedPlace
