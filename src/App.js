@@ -1,15 +1,18 @@
+// React
 import React, { Component } from 'react';
-import './App.css';
+// Material
+import { MuiThemeProvider } from 'material-ui/styles';
+// Custom
 import MapContainer from './components/MapContainer';
 import PlaceList from './components/PlaceList';
 import PlaceDetails from './components/PlaceDetails';
-import { MuiThemeProvider } from 'material-ui/styles';
 import { themeOverrides } from './themeOverrides';
 import ContextMenu from './components/ContextMenu';
 import AddPlaceDialog from './components/AddPlaceDialog';
+import './App.css';
 
 const debugWithErrorGoogle = false;
-const debugWithErrorLocal = true;
+const debugWithErrorLocal = false;
 
 class App extends Component {
   constructor(props) {

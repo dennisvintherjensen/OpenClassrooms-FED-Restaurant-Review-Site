@@ -1,7 +1,10 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import { withStyles } from 'material-ui/styles';
 import List from 'material-ui/List';
+// Custom
 import ReviewListItem from './ReviewListItem';
 import AddReview from './AddReview';
 

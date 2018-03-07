@@ -1,8 +1,11 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
+// Custom
 import Rating from './Rating';
 
 class PlaceListItem extends React.Component {

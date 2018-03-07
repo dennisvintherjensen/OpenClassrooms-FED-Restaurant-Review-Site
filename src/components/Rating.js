@@ -1,7 +1,10 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import StarIcon from 'material-ui-icons/Star';
 import Typography from 'material-ui/Typography';
+// Custom
 import './Rating.css';
 
 class Rating extends React.Component {

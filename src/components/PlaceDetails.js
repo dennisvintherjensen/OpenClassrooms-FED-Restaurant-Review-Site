@@ -1,5 +1,7 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
@@ -8,6 +10,7 @@ import OpenInNewIcon from 'material-ui-icons/OpenInNew';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import PhoneIcon from 'material-ui-icons/Phone';
 import { withStyles } from 'material-ui/styles';
+// Custom
 import Rating from './Rating';
 import ReviewList from './ReviewList';
 import Panorama from './Panorama';

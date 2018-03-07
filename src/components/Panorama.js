@@ -1,5 +1,7 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import { withStyles } from 'material-ui/styles';
 
 const styles = {

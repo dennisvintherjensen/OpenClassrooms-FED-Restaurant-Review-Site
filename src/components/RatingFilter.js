@@ -1,7 +1,10 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
+// Custom
 import Rating from './Rating';
 
 const styles = {
