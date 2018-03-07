@@ -8,6 +8,9 @@ import { themeOverrides } from './themeOverrides';
 import ContextMenu from './components/ContextMenu';
 import AddPlaceDialog from './components/AddPlaceDialog';
 
+const debugWithErrorGoogle = false;
+const debugWithErrorLocal = false;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +23,20 @@ class App extends Component {
       minRating: 1,
       contextMenuOpen: false,
       contextMenuPosition: {},
-      addPlaceDialogOpen: false
+      addPlaceDialogOpen: false,
+      googleQueryStatus: '',
+      localQueryStatus: ''
     };
     this.selectedPlaceIsInbounds = this.selectedPlaceIsInbounds.bind(this);
   }
 
   componentDidMount() {
-    // @TODO: Refactor
-    fetch('data/places.json', {
+    // @TODO: Refactordd
+    let url = 'data/places.json';
+    if (debugWithErrorLocal) {
+      url += 'error';
+    }
+    fetch(url, {
       method: 'get',
       headers: {
         Accept: 'application/json',
@@ -36,12 +45,17 @@ class App extends Component {
     })
       .then((data) => data.json())
       .catch((error) => {
-        console.log(error);
+        this.setState({
+          localQueryStatus: 'ERROR'
+        });
       })
       .then((places) => {
-        this.setState({
-          places: places
-        });
+        if (places) {
+          this.setState({
+            places: places,
+            localQueryStatus: 'OK'
+          });
+        }
       });
 
     // Try to get user's position
@@ -96,6 +110,8 @@ class App extends Component {
               // If a place is not selected, display the list of places
               <PlaceList
                 places={this.filterPlaces()}
+                googleQueryStatus={this.state.googleQueryStatus}
+                localQueryStatus={this.state.localQueryStatus}
                 setSelectedPlace={(place) => this.setSelectedPlace(place)}
                 positionDenied={this.state.positionDenied}
                 setMinRating={(value) => this.setState({ minRating: value })}
@@ -172,11 +188,17 @@ class App extends Component {
     };
 
     this.placesService.nearbySearch(query, (places, status) => {
-      // @TODO: Handle situations where status is not ok.
+      if (debugWithErrorGoogle) {
+        status = 'UNKNOWN_ERROR';
+        places = [];
+      }
+      this.setState({
+        googleQueryStatus: status
+      });
+      this.setState({ placesFromGoogle: places }, () => {
+        this.updatePlacesInBounds();
+      });
       if (status === this.google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({ placesFromGoogle: places }, () =>
-          this.updatePlacesInBounds()
-        );
         // Unset selected place if it's not contained in places currently displayed.
         if (!this.selectedPlaceIsInbounds()) {
           this.setSelectedPlace(null);
