@@ -9,7 +9,7 @@ import ContextMenu from './components/ContextMenu';
 import AddPlaceDialog from './components/AddPlaceDialog';
 
 const debugWithErrorGoogle = false;
-const debugWithErrorLocal = false;
+const debugWithErrorLocal = true;
 
 class App extends Component {
   constructor(props) {
@@ -114,6 +114,7 @@ class App extends Component {
                 localQueryStatus={this.state.localQueryStatus}
                 setSelectedPlace={(place) => this.setSelectedPlace(place)}
                 positionDenied={this.state.positionDenied}
+                minRating={this.state.minRating}
                 setMinRating={(value) => this.setState({ minRating: value })}
               />
             ) : (

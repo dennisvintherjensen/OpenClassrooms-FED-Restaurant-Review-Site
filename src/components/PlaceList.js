@@ -17,7 +17,7 @@ const style = {
   loaderText: {
     'margin-top': '10px'
   },
-  error: {
+  text: {
     padding: '25px'
   },
   errorText: {
@@ -36,17 +36,13 @@ class PlaceList extends React.Component {
     const classes = this.props.classes;
     return (
       <div className={classes.placeList}>
-        {!this.gotPlaces() && !this.gotError() ? (
-          <div className="progress-container">
-            <CircularProgress />
-            <Typography classes={{ root: classes.loaderText }} type="caption">
-              Loading restaurants...
-            </Typography>
-          </div>
-        ) : null}
-        {this.gotError() ? (
+        {!this.allSourcesGotError() ? (
+          <RatingFilter
+            setMinRating={(value) => this.props.setMinRating(value)}
+          />
+        ) : (
           <div className="warning-bg">
-            <div className={classes.error}>
+            <div className={classes.text}>
               <Typography classes={{ root: classes.errorText }} type="headline">
                 Whoops!
               </Typography>
@@ -56,11 +52,27 @@ class PlaceList extends React.Component {
               </Typography>
             </div>
           </div>
-        ) : (
-          <RatingFilter
-            setMinRating={(value) => this.props.setMinRating(value)}
-          />
         )}
+
+        {!this.gotPlaces() && !this.sourcesReplied() ? (
+          <div className="progress-container">
+            <CircularProgress />
+            <Typography classes={{ root: classes.loaderText }} type="caption">
+              Loading restaurants...
+            </Typography>
+          </div>
+        ) : null}
+
+        {!this.gotPlaces() && this.props.minRating > 1 ? (
+          <div className={classes.text}>
+            <Typography>
+              No restarurants with a rating of {this.props.minRating} or above
+              if located in this area. Try lowering the ratings filter to show
+              restaurants with lower ratings.
+            </Typography>
+          </div>
+        ) : null}
+
         <List>{this.renderListItems()}</List>
       </div>
     );
@@ -77,13 +89,15 @@ class PlaceList extends React.Component {
     });
   }
   gotPlaces() {
+    return this.props.places.length > 0;
+  }
+  sourcesReplied() {
     return (
-      (this.props.googleQueryStatus === 'OK' ||
-        this.props.localQueryStatus === 'OK') &&
-      this.props.places.length > 0
+      this.props.googleQueryStatus === 'OK' ||
+      this.props.localQueryStatus === 'OK'
     );
   }
-  gotError() {
+  allSourcesGotError() {
     return (
       this.props.googleQueryStatus !== 'OK' &&
       this.props.googleQueryStatus !== '' &&
