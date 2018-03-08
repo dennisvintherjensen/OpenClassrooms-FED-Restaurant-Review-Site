@@ -96,7 +96,6 @@ class App extends Component {
               currentPosition={this.state.currentPosition}
               positionDenied={this.state.positionDenied}
               setSelectedPlace={(place) => this.setSelectedPlace(place)}
-              clearSelectedPlace={() => this.setSelectedPlace(null)}
               selectedPlace={this.state.selectedPlace}
               refGoogle={(google) => this.refGoogle(google)}
               refMap={(map) => this.refMap(map)}
@@ -116,7 +115,6 @@ class App extends Component {
                 googleQueryStatus={this.state.googleQueryStatus}
                 localQueryStatus={this.state.localQueryStatus}
                 setSelectedPlace={(place) => this.setSelectedPlace(place)}
-                positionDenied={this.state.positionDenied}
                 minRating={this.state.minRating}
                 setMinRating={(value) => this.setState({ minRating: value })}
               />
@@ -124,7 +122,6 @@ class App extends Component {
               // Else, display details for the seleted place
               <PlaceDetails
                 place={this.state.selectedPlace}
-                placeDetails={this.state.selectedPlaceDetails}
                 google={this.google}
                 clearSelectedPlace={() => this.setSelectedPlace(null)}
                 submitReview={(review) => this.submitReview(review)}

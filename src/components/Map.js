@@ -86,7 +86,6 @@ class Map extends React.Component {
 Map.propTypes = {
   google: PropTypes.object,
   zoom: PropTypes.number,
-  defaultCurrentPosition: PropTypes.object,
   currentPosition: PropTypes.object,
   refMap: PropTypes.func
 };

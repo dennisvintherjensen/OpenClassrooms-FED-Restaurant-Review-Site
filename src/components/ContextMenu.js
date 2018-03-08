@@ -53,7 +53,8 @@ class ContextMenu extends React.Component {
 ContextMenu.props = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool,
-  position: PropTypes.object
+  position: PropTypes.object,
+  addRestaurant: PropTypes.func
 };
 
 export default withStyles(styles)(ContextMenu);
