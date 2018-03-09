@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // Material
 import StarIcon from 'material-ui-icons/Star';
 import Typography from 'material-ui/Typography';
-// Custom
+// Using imported CSS as oposed to CSS in JSX due to larger amount of CSS and child classes being overwritten
 import './Rating.css';
 
 class Rating extends React.Component {
