@@ -11,22 +11,44 @@ const styles = {
   }
 };
 
+/**
+ * Panorama view which displays a Google Places panorama view
+ */
 class Panorama extends React.Component {
+  /**
+   * Constructor
+   * @param {Object} prop
+   */
   constructor(props) {
     super(props);
     this.panorama = null;
   }
-
+  /**
+   * LifeCycle
+   */
   componentDidMount() {
     this.renderPanorama();
   }
-
+  /**
+   * LifeCycle
+   * @param {Object} prevProps
+   */
   componentDidUpdate(prevProps) {
+    // Render new panorama is place has changed
     if (this.props.place.place_id !== prevProps.place.place_id) {
       this.renderPanorama();
     }
   }
-
+  /**
+   * Rendering
+   */
+  render() {
+    const classes = this.props.classes;
+    return <div ref="panorama" className={classes.panorama} />;
+  }
+  /**
+   * Renders the panorama
+   */
   renderPanorama() {
     this.panorama = new this.props.google.maps.StreetViewPanorama(
       this.refs.panorama,
@@ -41,11 +63,6 @@ class Panorama extends React.Component {
         zoom: 1
       }
     );
-  }
-
-  render() {
-    const classes = this.props.classes;
-    return <div ref="panorama" className={classes.panorama} />;
   }
 }
 

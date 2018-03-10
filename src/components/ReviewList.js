@@ -15,7 +15,13 @@ const styles = {
   }
 };
 
+/**
+ * A list of reviews for a place
+ */
 class ReviewList extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     return (
@@ -27,8 +33,12 @@ class ReviewList extends React.Component {
       </div>
     );
   }
+  /**
+   * Renders each review
+   */
   renderReviews() {
     return this.props.reviews.map((review, index) => {
+      // The authors concatenated name and the time of the review is used as key for the React object
       const id = review.author_name.replace(' ', '') + review.time.toString();
       return <ReviewListItem review={review} key={id} />;
     });

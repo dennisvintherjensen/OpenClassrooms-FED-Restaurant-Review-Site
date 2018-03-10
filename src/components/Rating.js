@@ -7,7 +7,13 @@ import Typography from 'material-ui/Typography';
 // Using imported CSS as oposed to CSS in JSX due to larger amount of CSS and child classes being overwritten
 import './Rating.css';
 
+/**
+ * Rating component with functionality to both show rating and to act as input
+ */
 class Rating extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     return (
       <div className="star-rating">
@@ -19,7 +25,9 @@ class Rating extends React.Component {
       </div>
     );
   }
-
+  /**
+   * Display the current rating if available
+   */
   renderValue() {
     if (this.props.value > 0 && !this.props.editable) {
       return (
@@ -29,7 +37,9 @@ class Rating extends React.Component {
       );
     }
   }
-
+  /**
+   * Render the filled and empty stars
+   */
   renderRating() {
     if (this.props.value > 0 || this.props.editable) {
       const style = {
@@ -47,7 +57,9 @@ class Rating extends React.Component {
     }
     return <div className="no-rating">No rating</div>;
   }
-
+  /**
+   * Renders an amount of stars
+   */
   renderStars(amount) {
     const stars = [];
     while (stars.length < amount) {

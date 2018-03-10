@@ -35,7 +35,13 @@ const styles = {
   }
 };
 
+/**
+ * Card that contains details on a place
+ */
 class PlaceDetails extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     const place = this.props.place;
@@ -69,7 +75,9 @@ class PlaceDetails extends React.Component {
       </Card>
     );
   }
-
+  /**
+   * Renders properties if available for the place
+   */
   renderProp(prop) {
     if (this.props.place[prop]) {
       const place = this.props.place;
@@ -92,6 +100,9 @@ class PlaceDetails extends React.Component {
           break;
         default:
           break;
+      }
+      if (!icon) {
+        return null;
       }
       return (
         <ListItem>

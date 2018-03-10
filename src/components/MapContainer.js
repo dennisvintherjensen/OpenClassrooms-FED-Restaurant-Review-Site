@@ -9,8 +9,14 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
 import Marker from './Marker';
 import InfoWindow from './InfoWindow';
-
+/**
+ * Container for GoogleApiWrapper
+ */
 class MapContainer extends React.Component {
+  /**
+   * Constructor
+   * @param {*} props
+   */
   constructor(props) {
     super(props);
     this.state = {

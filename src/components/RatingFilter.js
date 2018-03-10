@@ -19,14 +19,23 @@ const styles = {
   }
 };
 
+/**
+ * A filter for limiting the displayed places to only those above a certain rating
+ */
 class RatingFilter extends React.Component {
+  /**
+   * Constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
       minRating: 1
     };
   }
-
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     return (
@@ -42,7 +51,10 @@ class RatingFilter extends React.Component {
       </div>
     );
   }
-
+  /**
+   * Handler for when the value of the filter is changed
+   * @param {number} rating
+   */
   handleChange(rating) {
     this.setState(
       {

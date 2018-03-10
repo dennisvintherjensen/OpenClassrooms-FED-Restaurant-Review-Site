@@ -6,24 +6,33 @@ import PropTypes from 'prop-types';
 import { CircularProgress } from 'material-ui/Progress';
 
 class Map extends React.Component {
+  /**
+   * LifeCycle
+   * @param {Object} nextProps
+   * @param {Object} nextState
+   */
   componentWillUpdate(nextProps, nextState) {
-    // Only act if google object changed. This will happen when navigating from one route to another if both have a Map component.
+    // Only act if google object has changed.
+    // This may happen when navigating from one route to another if both have a Map component.
     if (nextProps.google !== this.props.google) {
       this.loadMap();
     }
   }
-
+  /**
+   * LifeCycle
+   * @param {Object} prevProps
+   * @param {Object} prevState
+   */
   componentDidUpdate(prevProps, prevState) {
     // Act if we get a new currentPosition.
+    // This happens on first load
     if (prevProps.currentPosition !== this.props.currentPosition) {
       this.loadMap();
     }
   }
-
-  componentDidMount() {
-    this.loadMap();
-  }
-
+  /**
+   * Rendering
+   */
   render() {
     return (
       <div ref="map" className="map">
@@ -34,7 +43,10 @@ class Map extends React.Component {
       </div>
     );
   }
-
+  /**
+   * Render child components (markers)
+   * By cloning the child components, references to map, google, and mapCenter is included
+   */
   renderChildren() {
     const children = this.props.children;
     if (!children) {
@@ -50,32 +62,27 @@ class Map extends React.Component {
       }
     });
   }
-
+  /**
+   * Loads the map
+   */
   loadMap() {
+    // Wait for a position to be available in case one of the life cycles hooks are triggered before this
     if (this.props.currentPosition === undefined) {
       return;
     }
-
     if (this.props && this.props.google) {
       const google = this.props.google;
       const maps = google.maps;
-      const mapRef = this.refs.map;
-      const node = ReactDOM.findDOMNode(mapRef);
-
+      const node = ReactDOM.findDOMNode(this.refs.map);
       const zoom = this.props.zoom;
       const position = this.props.currentPosition;
       const lat = position.lat;
       const lng = position.lng;
       const center = new maps.LatLng(lat, lng);
-
-      const mapConfig = Object.assign(
-        {},
-        {
-          center: center,
-          zoom: zoom
-        }
-      );
-
+      const mapConfig = {
+        center: center,
+        zoom: zoom
+      };
       const map = new maps.Map(node, mapConfig);
       this.map = map;
       this.props.refMap(this.map);

@@ -25,18 +25,29 @@ const style = {
   }
 };
 
+/**
+ * List of places
+ */
 class PlaceList extends React.Component {
+  /**
+   * Constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
       places: []
     };
   }
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     return (
       <div className={classes.placeList}>
-        {!this.allSourcesGotError() ? (
+        {// Show rating filter if we are able to fetch places from at least one source. Else, show a warning.
+        !this.allSourcesGotError() ? (
           <RatingFilter
             setMinRating={(value) => this.props.setMinRating(value)}
           />
@@ -53,8 +64,8 @@ class PlaceList extends React.Component {
             </div>
           </div>
         )}
-
-        {!this.gotPlaces() && !this.sourcesReplied() ? (
+        {// Show loader until places are loaded
+        !this.gotPlaces() && !this.sourcesReplied() ? (
           <div className="progress-container">
             <CircularProgress />
             <Typography classes={{ root: classes.loaderText }} type="caption">
@@ -62,8 +73,8 @@ class PlaceList extends React.Component {
             </Typography>
           </div>
         ) : null}
-
-        {!this.gotPlaces() && this.props.minRating > 1 ? (
+        {//Show notice if places are found, but none are above the rating filter
+        !this.gotPlaces() && this.props.minRating > 1 ? (
           <div className={classes.text}>
             <Typography>
               No restarurants with a rating of {this.props.minRating} or above
@@ -72,11 +83,13 @@ class PlaceList extends React.Component {
             </Typography>
           </div>
         ) : null}
-
         <List>{this.renderListItems()}</List>
       </div>
     );
   }
+  /**
+   * Render the items for the list
+   */
   renderListItems() {
     return this.props.places.map((place) => {
       return (
@@ -88,15 +101,24 @@ class PlaceList extends React.Component {
       );
     });
   }
+  /**
+   * Returns true if any places exists
+   */
   gotPlaces() {
     return this.props.places.length > 0;
   }
+  /**
+   * Returns true if all sources reply
+   */
   sourcesReplied() {
     return (
       this.props.googleQueryStatus === 'OK' ||
       this.props.localQueryStatus === 'OK'
     );
   }
+  /**
+   * returns true if all sources has failed
+   */
   allSourcesGotError() {
     return (
       this.props.googleQueryStatus !== 'OK' &&

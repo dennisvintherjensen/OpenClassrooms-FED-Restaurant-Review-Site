@@ -8,7 +8,13 @@ import Typography from 'material-ui/Typography';
 // Custom
 import Rating from './Rating';
 
+/**
+ * An item for the review list
+ */
 class ReviewListItem extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     const review = this.props.review;
     return (
@@ -26,7 +32,9 @@ class ReviewListItem extends React.Component {
       </ListItem>
     );
   }
-
+  /**
+   * Returns the first letter of each name in an authors name
+   */
   getInitials() {
     return this.props.review.author_name
       .split(' ')

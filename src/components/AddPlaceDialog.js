@@ -29,7 +29,14 @@ const styles = {
   }
 };
 
+/**
+ * A dialog window with fields for adding a new place
+ */
 class AddPlaceDialog extends React.Component {
+  /**
+   * Constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +47,10 @@ class AddPlaceDialog extends React.Component {
       location: null
     };
   }
-
+  /**
+   * Initializes the autocomplete field used for entering the address
+   * @param {HTMLInputElement} input
+   */
   initAutocomplete(input) {
     if (this.props.google && this.props.map && input) {
       const google = this.props.google;
@@ -54,12 +64,14 @@ class AddPlaceDialog extends React.Component {
       );
     }
   }
-
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     return (
       <div>
-        <Dialog open={this.props.open} aria-labelledby="form-dialog-title">
+        <Dialog open={this.props.open}>
           <DialogTitle id="form-dialog-title">
             Thanks for participating
           </DialogTitle>
@@ -85,6 +97,7 @@ class AddPlaceDialog extends React.Component {
                   name="vicinity"
                   type="text"
                   margin="dense"
+                  // inputRef will return a reference to the HTML input element used for initializing the address autocomplete.
                   inputRef={(input) => this.initAutocomplete(input)}
                   required
                 />
@@ -134,13 +147,18 @@ class AddPlaceDialog extends React.Component {
       </div>
     );
   }
-
+  /**
+   * Handler for input value changes. Saves new value to state.
+   * @param {Event} event
+   */
   handleChange(event) {
     const update = {};
     update[event.target.name] = event.target.value;
     this.setState(update);
   }
-
+  /**
+   * Handler for when a suggested address is selected. Saves the selected to state.
+   */
   onAddressSelect() {
     const place = this.autocomplete.getPlace();
     this.setState({
@@ -148,7 +166,9 @@ class AddPlaceDialog extends React.Component {
       vicinity: place.formatted_address
     });
   }
-
+  /**
+   * Returns true if required fields are not empty
+   */
   validForm() {
     return (
       this.state.name !== '' &&
@@ -156,7 +176,9 @@ class AddPlaceDialog extends React.Component {
       this.state.location !== null
     );
   }
-
+  /**
+   * Passes an object with properties of a place to parent
+   */
   submitForm() {
     const place = {
       name: this.state.name,
@@ -172,7 +194,9 @@ class AddPlaceDialog extends React.Component {
     };
     this.props.submitPlace(place);
   }
-
+  /**
+   * Closes the dialog - clearing all input fields as well.
+   */
   closeDialog() {
     this.setState({
       name: '',

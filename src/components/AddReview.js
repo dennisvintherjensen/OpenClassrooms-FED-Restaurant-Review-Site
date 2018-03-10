@@ -41,8 +41,14 @@ const styles = {
     'justify-content': 'space-between'
   }
 };
-
+/**
+ * Form with fields for adding a review to a place
+ */
 class AddReview extends React.Component {
+  /**
+   * Constructor
+   * @param {Object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +59,9 @@ class AddReview extends React.Component {
       expanded: false
     };
   }
-
+  /**
+   * Rendering
+   */
   render() {
     const classes = this.props.classes;
     return (
@@ -129,13 +137,18 @@ class AddReview extends React.Component {
       </ExpansionPanel>
     );
   }
-
+  /**
+   * Handler for input value changes. Saves new value to state.
+   * @param {Event} event
+   */
   handleOnChange(event) {
     const update = {};
     update[event.target.id] = event.target.value;
     this.setState(update);
   }
-
+  /**
+   * Return valid if all required fields are set
+   */
   validForm() {
     return (
       this.state.firstName !== '' &&
@@ -144,7 +157,9 @@ class AddReview extends React.Component {
       this.state.rating !== 0
     );
   }
-
+  /**
+   * Builds and passes an object with review properties to parent - also reset the form.
+   */
   submitReview() {
     const author_name = `${this.state.firstName} ${this.state.lastName}`;
     const id = author_name.replace(' ', '') + new Date().getTime().toString();
@@ -157,7 +172,9 @@ class AddReview extends React.Component {
     this.props.submitReview(review);
     this.resetForm();
   }
-
+  /**
+   * Resets the form; sets all fields to their original value.
+   */
   resetForm() {
     this.setState({
       expanded: false

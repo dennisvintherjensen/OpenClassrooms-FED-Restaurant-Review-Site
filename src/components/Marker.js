@@ -2,15 +2,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Marker for highlighting a place's position on the map
+ */
 class Marker extends React.Component {
+  /**
+   * Rendering
+   * Returning null due to not rendering anything to the DOM
+   */
   render() {
     return null;
   }
-
+  /**
+   * LifeCycle
+   * @param {Object} prevProps
+   */
   componentDidUpdate(prevProps) {
-    if (this.props.map !== prevProps.map && this.props.map !== null) {
-      this.renderMarker();
-    }
+    // Only act if google object has changed which may happen when navigating from one route to another if both have a Map component.
+    // if (this.props.map !== prevProps.map && this.props.map !== null) {
+    //   this.renderMarker();
+    // }
     // Scale icon for selected place
     if (this.props.selectedPlace !== prevProps.selectedPlace) {
       let icon = {
@@ -23,14 +34,20 @@ class Marker extends React.Component {
       this.marker.setIcon(icon);
     }
   }
-
+  /**
+   * LifeCycle
+   */
   componentDidMount() {
+    // Render prop when component mounts
     if (this.props.map && this.props.position) {
       this.renderMarker();
     }
   }
-
+  /**
+   * LifeCycle
+   */
   componentWillUnmount() {
+    // Remove marker when this component unmounts
     if (this.marker) {
       this.removeMarker();
     }

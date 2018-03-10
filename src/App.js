@@ -6,9 +6,9 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import MapContainer from './components/MapContainer';
 import PlaceList from './components/PlaceList';
 import PlaceDetails from './components/PlaceDetails';
-import { themeOverrides } from './themeOverrides';
 import ContextMenu from './components/ContextMenu';
 import AddPlaceDialog from './components/AddPlaceDialog';
+import { themeOverrides } from './themeOverrides';
 // Using imported CSS as oposed to CSS in JSX due to larger amount of CSS and media quries
 import './App.css';
 
@@ -19,7 +19,7 @@ const debugWithErrorLocal = false;
 class App extends Component {
   /**
    * Constructor
-   * @param {*} props
+   * @param {Object} props
    */
   constructor(props) {
     super(props);
@@ -121,6 +121,7 @@ class App extends Component {
   }
   /**
    * Runs when position is available and access is allowed
+   * @param {Position} position
    */
   getPositionSuccess(position) {
     const currentPosition = {
@@ -133,6 +134,7 @@ class App extends Component {
   }
   /**
    * Runs when position is not available
+   * @param {PositionError} error
    */
   getPositionError(error) {
     console.log(`Error (${error.code}): ${error.message}`);
@@ -207,7 +209,8 @@ class App extends Component {
     });
   }
   /**
-   *  Fetches information about a place and saves it to state.
+   * Fetches information about a place and saves it to state.
+   * @param {string} placeId
    */
   fetchPlaceDetails(placeId) {
     if (!placeId) {
@@ -275,6 +278,7 @@ class App extends Component {
   }
   /**
    * Adds a review to the currently selected place
+   * @param {Object} review
    */
   submitReview(review) {
     // Don't directly update current state
@@ -297,6 +301,7 @@ class App extends Component {
   }
   /**
    * Adds a new place
+   * @param {Object} place
    */
   submitPlace(place) {
     // Set place id to the next available one if missing
@@ -329,7 +334,7 @@ class App extends Component {
   }
   /**
    * Adds a reference to map to this classes properties
-   * @param {*} map
+   * @param {Map} map
    */
   refMap(map) {
     if (this.map !== map) {
@@ -342,7 +347,7 @@ class App extends Component {
   }
   /**
    * Adds a reference to google to this classes properties
-   * @param {*} google
+   * @param {google} google
    */
   refGoogle(google) {
     if (this.google !== google) {
@@ -355,7 +360,7 @@ class App extends Component {
   }
   /**
    * Handler for when the map is right clicked
-   * @param {*} event
+   * @param {Event} event
    */
   handleRightClick(event) {
     this.setState({
@@ -409,6 +414,7 @@ class App extends Component {
   }
   /**
    * Save selected place to state
+   * @param {Object} place
    */
   setSelectedPlace(place) {
     if (place !== null && place) {

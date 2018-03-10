@@ -8,11 +8,18 @@ import Typography from 'material-ui/Typography';
 // Custom
 import Rating from './Rating';
 
+/**
+ * Item for list of places
+ */
 class PlaceListItem extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     const place = this.props.place;
     const rating = place.rating;
     let imageUrl;
+    // Use a default image if not images exist for this place
     if (place.photos && place.photos.length > 0) {
       imageUrl = place.photos[0].getUrl({
         maxWidth: 400,

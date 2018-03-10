@@ -13,7 +13,13 @@ const styles = {
   }
 };
 
+/**
+ * Context menu with options for when right clicking the map
+ */
 class ContextMenu extends React.Component {
+  /**
+   * Rendering
+   */
   render() {
     if (!this.props.open) {
       return null;
@@ -29,7 +35,11 @@ class ContextMenu extends React.Component {
       </div>
     );
   }
-
+  /**
+   * Position is calculated so that the context menu will not end up outside the map
+   * - E.g: If right click occurs close to the right border of the map, we will display the menu on the left side of the clicked position
+   * - default is right side of the position
+   */
   positionStyle() {
     const y = this.props.position.y;
     const x = this.props.position.x;
