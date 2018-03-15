@@ -29,6 +29,7 @@ class App extends Component {
       placesInBounds: [],
       positionDenied: false,
       selectedPlace: null,
+      currentPosition: null,
       minRating: 1,
       contextMenuOpen: false,
       contextMenuPosition: {},
@@ -213,11 +214,6 @@ class App extends Component {
    * @param {string} placeId
    */
   fetchPlaceDetails(placeId) {
-    if (!placeId) {
-      // Places comming from local DB does not have the property placeId set, so this is comming from local DB.
-      // We do not fetch info from Google Places for our own places.
-      return;
-    }
     this.placesService.getDetails(
       {
         placeId: placeId
@@ -418,6 +414,8 @@ class App extends Component {
    */
   setSelectedPlace(place) {
     if (place !== null && place) {
+      // Places comming from local DB does not have the property placeId set, so this is comming from local DB.
+      // We do not fetch info from Google Places for our own places.
       this.fetchPlaceDetails(place.place_id);
     }
     this.setState({

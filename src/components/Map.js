@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 // Material
 import { CircularProgress } from 'material-ui/Progress';
 
+/**
+ * Map
+ */
 class Map extends React.Component {
   /**
    * LifeCycle
