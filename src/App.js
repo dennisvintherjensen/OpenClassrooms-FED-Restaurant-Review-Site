@@ -413,8 +413,8 @@ class App extends Component {
    * @param {Object} place
    */
   setSelectedPlace(place) {
-    if (place !== null && place) {
-      // Places comming from local DB does not have the property placeId set, so this is comming from local DB.
+    if (place !== null && place && place.place_id) {
+      // Places comming from local DB does not have the property placeId set, so this is not comming from local DB.
       // We do not fetch info from Google Places for our own places.
       this.fetchPlaceDetails(place.place_id);
     }

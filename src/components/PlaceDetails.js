@@ -60,7 +60,7 @@ class PlaceDetails extends React.Component {
         <CardContent className="primary-bg" classes={{ root: classes.rating }}>
           <Rating max={5} value={place.rating} />
         </CardContent>
-        <Panorama place={this.props.place} google={this.props.google} />
+        <Panorama place={place} google={this.props.google} />
         <List dense={true}>
           {this.renderProp('vicinity')}
           {this.renderProp('formatted_phone_number')}

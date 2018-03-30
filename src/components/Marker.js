@@ -19,9 +19,9 @@ class Marker extends React.Component {
    */
   componentDidUpdate(prevProps) {
     // Only act if google object has changed which may happen when navigating from one route to another if both have a Map component.
-    // if (this.props.map !== prevProps.map && this.props.map !== null) {
-    //   this.renderMarker();
-    // }
+    if (this.props.map !== prevProps.map && this.props.map !== null) {
+      this.renderMarker();
+    }
     // Scale icon for selected place
     if (this.props.selectedPlace !== prevProps.selectedPlace) {
       let icon = {
@@ -99,6 +99,10 @@ class Marker extends React.Component {
     this.marker.addListener('mouseout', () => this.props.onHoverOut());
   }
 
+  /**
+   * Translates this markers position to pixels
+   * Located at: http://krasimirtsonev.com/blog/article/google-maps-api-v3-convert-latlng-object-to-actual-pixels-point-object
+   */
   point() {
     const google = this.props.google;
     const map = this.props.map;
